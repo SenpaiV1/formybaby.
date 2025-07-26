@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="style1.css">
+</head>
+
+      <div class="custom-audio-player">
+  <button id="audioControlBtn">⏸</button>
+</div>
+
+<div class="card">
+	<div class="card__content">
+		<p>
+			My baby, I want you to know <br>
+			that you are the love of my life. <br>
+			I want you to know
+		</p>
+
+		<p>
+			that when I am struggling <br>
+			you're always there for me.<br>
+			I want to do the same for you
+		</p>
+
+		<p>
+			when you have a problems, <br>
+			when you're struggling with life <br>
+			I want to be there for you.
+		</p>
+
+		<p>
+			I love you forever<br>
+			I'll always be there for you <br>
+			<br>
+            Forever yours, Nella.
+		</p>
+	</div>
+
+	<fieldset class="card__color-picker">
+		<legend>Select a color:</legend>
+
+		<input type="radio" id="red" name="color" value="red" />
+		<label for="red">Red</label>
+
+		<input type="radio" id="blue" name="color" value="blue" />
+		<label for="blue">Blue</label>
+
+		<input type="radio" id="green" name="color" value="green" />
+		<label for="green">Green</label>
+
+		<input type="radio" id="yellow" name="color" value="yellow" />
+		<label for="yellow">Yellow</label>
+
+		<input type="radio" id="orange" name="color" value="orange" />
+		<label for="orange">Orange</label>
+	</fieldset>
+	<div>
+
+		<div class="hearts">
+			<div class="heart heart--is-yellow heart--top-left"></div>
+			<div class="heart heart--with-dots heart--is-green heart--left-center"></div>
+			<div class="heart heart--with-dots heart--is-red heart--top-center"></div>
+			<div class="heart heart--is-pink heart--bottom-center"></div>
+			<div class="heart heart--is-orange heart--bottom-right"></div>
+			<div class="heart heart--is-blue heart--with-lines heart--top-right"></div>
+		</div>
+
+<script>
+// Playlist setup
+const playlist = [
+  "../audio/bgmusic.mp3",
+  "audio/song2.mp3",
+  "audio/song3.mp3"
+];
+
+let currentTrackIndex = 0;
+
+// Create and set up the audio element
+const audio = document.createElement("audio");
+audio.src = playlist[currentTrackIndex];
+audio.autoplay = true;
+audio.id = "bgMusic";
+audio.style.display = "none";
+document.body.appendChild(audio);
+
+// Control button functionality
+const audioBtn = document.getElementById("audioControlBtn");
+
+audioBtn.addEventListener("click", () => {
+  if (audio.paused) {
+    audio.play();
+    audioBtn.textContent = "⏸";
+  } else {
+    audio.pause();
+    audioBtn.textContent = "►";
+  }
+});
+
+// Go to the next track when current one ends
+audio.addEventListener("ended", () => {
+  currentTrackIndex++;
+  if (currentTrackIndex < playlist.length) {
+    audio.src = playlist[currentTrackIndex];
+    audio.play();
+  } else {
+    audioBtn.textContent = "►"; // Stop at end of playlist
+  }
+});
+</script>

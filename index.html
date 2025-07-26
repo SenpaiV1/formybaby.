@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>hehe</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f1f1f1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 100px;
+    }
+
+    #screen {
+      width: 260px;
+      height: 50px;
+      text-align: center;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      border: 2px solid #444;
+      background: #fff;
+      padding: 5px;
+      letter-spacing: 8px;
+      border-radius: 8px;
+    }
+
+    .keypad {
+      display: grid;
+      grid-template-columns: repeat(3, 80px);
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .keypad button {
+      padding: 18px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      background: #ccc;
+      border-radius: 8px;
+      transition: background 0.2s ease;
+    }
+
+    .keypad button:active {
+      background: #aaa;
+    }
+
+    #message {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    #secret-button {
+      display: none;
+      margin-top: 30px;
+      padding: 12px 24px;
+      font-size: 1.1rem;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    #secret-button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="screen">------</div>
+
+  <div class="keypad">
+    <button onclick="addDigit('1')">1</button>
+    <button onclick="addDigit('2')">2</button>
+    <button onclick="addDigit('3')">3</button>
+    <button onclick="addDigit('4')">4</button>
+    <button onclick="addDigit('5')">5</button>
+    <button onclick="addDigit('6')">6</button>
+    <button onclick="addDigit('7')">7</button>
+    <button onclick="addDigit('8')">8</button>
+    <button onclick="addDigit('9')">9</button>
+    <button onclick="clearPin()">Clear</button>
+    <button onclick="addDigit('0')">0</button>
+    <button onclick="checkPin()">Enter</button>
+  </div>
+
+  <div id="message"></div>
+
+  <button id="secret-button" onclick="alert('I love you baby')"><a href="pages/carousel.html" style="text-decoration: none; color: white;">Click Me</a></button>
+
+  <script>
+    const correctPin = "102908"; // Your 6-digit PIN
+    let input = "";
+
+    function addDigit(digit) {
+      if (input.length < 6) {
+        input += digit;
+        updateScreen();
+      }
+    }
+
+    function updateScreen() {
+      document.getElementById("screen").textContent = input.padEnd(6, "-");
+    }
+
+    function clearPin() {
+      input = "";
+      updateScreen();
+      document.getElementById("message").textContent = "";
+      document.getElementById("secret-button").style.display = "none";
+    }
+
+    function checkPin() {
+      const message = document.getElementById("message");
+      const secretBtn = document.getElementById("secret-button");
+
+      if (input === correctPin) {
+        message.textContent = "Access Granted ✅";
+        message.style.color = "green";
+        secretBtn.style.display = "inline-block"; // Show the button
+      } else {
+        message.textContent = "Incorrect Password";
+        message.style.color = "red";
+        secretBtn.style.display = "none"; // Hide if wrong
+      }
+      input = "";
+      updateScreen();
+    }
+  </script>
+
+</body>
+</html>
